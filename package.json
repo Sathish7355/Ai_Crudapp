@@ -1,0 +1,15 @@
+{
+  "name": "ai-crudapp-root",
+  "version": "1.0.0",
+  "description": "Full-stack CRUD application with React.js, Node.js, Express.js, MySQL, and JWT",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
