@@ -8,7 +8,8 @@ const {
   DB_PORT = 3306,
   DB_USER = 'root',
   DB_PASSWORD = '',
-  DB_NAME = 'ai_crudapp_db'
+  DB_NAME = 'ai_crudapp_db',
+  DB_SSL = 'false'
 } = process.env;
 
 let pool = null;
@@ -20,7 +21,9 @@ async function initDB() {
       host: DB_HOST,
       port: Number(DB_PORT),
       user: DB_USER,
-      password: DB_PASSWORD
+      password: DB_PASSWORD,
+       ssl: sslOption
+      
     });
 
     console.log('✓ Successfully connected to MySQL server');
@@ -39,7 +42,7 @@ async function initDB() {
       port: Number(DB_PORT),
       user: DB_USER,
       password: DB_PASSWORD,
-      database: DB_NAME,
+      ssl: sslOption,
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0
