@@ -11,7 +11,8 @@ const {
   DB_NAME = 'ai_crudapp_db',
   DB_SSL = 'false'
 } = process.env;
-const sslOption = DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined;
+const sslOption = String(DB_SSL).trim() === 'true' ? { rejectUnauthorized: false } : undefined;
+const dbPassword = String(DB_PASSWORD).trim();
 
 let pool = null;
 
@@ -22,7 +23,7 @@ async function initDB() {
       host: DB_HOST,
       port: Number(DB_PORT),
       user: DB_USER,
-      password: DB_PASSWORD,
+      password: dbPassword ,
        ssl: sslOption
       
     });
@@ -42,7 +43,7 @@ async function initDB() {
       host: DB_HOST,
       port: Number(DB_PORT),
       user: DB_USER,
-      password: DB_PASSWORD,
+      password: dbPassword ,
       database: DB_NAME,
       ssl: sslOption,
       waitForConnections: true,
