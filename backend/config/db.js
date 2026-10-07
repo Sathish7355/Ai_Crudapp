@@ -11,6 +11,7 @@ const {
   DB_NAME = 'ai_crudapp_db',
   DB_SSL = 'false'
 } = process.env;
+const sslOption = DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined;
 
 let pool = null;
 
@@ -37,11 +38,12 @@ async function initDB() {
     await connection.end();
 
     // 2. Establish connection pool with the target database
-    pool = mysql.createPool({
+     pool = mysql.createPool({
       host: DB_HOST,
       port: Number(DB_PORT),
       user: DB_USER,
       password: DB_PASSWORD,
+      database: DB_NAME,
       ssl: sslOption,
       waitForConnections: true,
       connectionLimit: 10,
