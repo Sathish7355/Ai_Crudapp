@@ -2,9 +2,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretjwtkey_ai_crudapp_2026_dev';
+const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
 
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 // Helper to generate JWT
 function generateToken(user) {
   return jwt.sign(
